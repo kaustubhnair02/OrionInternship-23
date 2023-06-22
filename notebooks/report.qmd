@@ -26,13 +26,273 @@ ax.grid(True)
 plt.show()
 ```
 
-Function for continuous variable, see @function.
 
+```{python}
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+#ROOT_DIR1 =  os.environ.get("ROOT_DIR") 
+#print(ROOT_DIR1)
+ROOT_DIR =  os.environ.get("ROOT_DIR2") 
+print(ROOT_DIR)
+```
 
 
 ```{python}
+import os
+os.chdir(ROOT_DIR)
 import numpy as np
 import pandas as pd
-df = pd.read_csv(r"E:\source\repos\OrionSummerInternship-2023\data\raw\train.csv")
-df
+import seaborn as sb
+from sklearn.preprocessing import LabelEncoder
+from src.util import catgvssale,contvssale,contvscont,check_column_skewness,remove_skewness,plot_contv,remove_ngskewness
+from datetime import datetime
+df = pd.read_csv( "data/raw/train.csv")
+temp_df=df
+```
+
+```{python}
+numerics =['int16','int32','int64','float16','float32','float64']
+numcol = df.select_dtypes(include=numerics)
+len(numcol)
+numcol
+```
+
+```{python}
+missingper = df.isna().sum().sort_values(ascending=False)/len(df)
+missingper.head(10)
+miss_col = missingper[missingper!=0]
+miss_col
+miss_col.head(19)
+```
+
+## Columns with NO Missing_Values
+```{python}
+nomiss_col = missingper[missingper == 0]
+nomiss_col
+nomiss_col.info()
+nomiss_col.head(15)
+```
+
+## Target:SalePrie
+```{python}
+
+#plot_contv(contvar="SalePrice",df=df)
+remove_skewness(df,"SalePrice")
+check_column_skewness(df,"SalePrice")
+plot_contv(contvar="SalePrice",df=df)
+```
+
+## MSSubClass 
+```{python}
+catgvssale(catgvar="MSSubClass",df=df)
+check_column_skewness(df,"MSSubClass")
+```
+
+## LotFrontage
+checking the skewness of a temporary df which does not include the values of the column LotFrontage which has value 0 and plotting it against the salePrice to check whether it is suitable for the model or not.
+skewness before log transform is 2.1635691423248837.
+now removing the skewness and checking the value againa and plotting it again to see the difference.
+skewness atfer log transform = -0.7287278423055492
+```{python}
+
+temp_df = df.loc[df['LotFrontage']!=0]
+remove_skewness(temp_df,"LotFrontage")
+check_column_skewness(temp_df,"LotFrontage")
+contvssale(contvar="LotFrontage",df=temp_df)
+```
+
+## LotArea
+Skewness = -0.1374044.
+The value is acceptable as it has already been transformed using the log transformation.
+```{python}
+remove_skewness(temp_df,"LotArea")
+contvssale(contvar="LotArea",df=temp_df)
+```
+
+## YearBuilt
+Skewness = -0.6134611.
+As the skewness of the column is already less than 1 there is no need to apply the log transformation.
+```{python}
+contvssale(contvar="YearBuilt",df=temp_df)
+check_column_skewness(temp_df,"YearBuilt")
+```
+
+## YearRemodAdd
+Skewness=-0.503562002.
+As from the below countplot, boxplot and regplot we can see that this data is not skewed.
+```{python}
+contvssale(contvar="YearRemodAdd",df=df)
+```
+
+## YearRemodAdd vs YearBuilt
+```{python}
+contvscont(contvar="YearBuilt",df=df,tarvar="YearRemodAdd")
+```
+
+## MasVnrArea
+skewness = 2.677616.
+From the below graph we can see that this data is a little positively skewed so we can apply here log transformation.
+skewness after = 0.50353171.
+```{python}
+op = remove_skewness(df,"MasVnrArea")
+check_column_skewness(df,"MasVnrArea")
+contvssale(contvar="MasVnrArea",df=df)
+```
+
+## BsmtFinSF1--
+skewness = 1.685503071910789.
+From the regression plot as well as boxplot we can say that this data is slightly skewed as it has more confidence in the regression plot.
+skewness = -0.618409817855514.
+```{python}
+remove_skewness(df,"BsmtFinSF1")
+check_column_skewness(df,"BsmtFinSF1")
+temp_df = df.loc[df['BsmtFinSF1']!=0]
+contvssale(contvar="BsmtFinSF1",df=temp_df)
+check_column_skewness(temp_df,"BsmtFinSF1")
+
+```
+
+## BsmtFinSF2: Type 2 finished square feet
+skewness = 4.255261108933303.
+The data is positively skewed and may impact our model so we apply log transform.
+skewness = 2.434961825856814.
+After removing the 0 values we get the column with skewness which is less than 1.
+skewness = 0.9942372017307054
+```{python}
+remove_skewness(df,"BsmtFinSF2")
+check_column_skewness(df,"BsmtFinSF2")
+temp_df = df.loc[df['BsmtFinSF2']!=0]
+contvssale(contvar="BsmtFinSF2",df=temp_df)
+check_column_skewness(temp_df,"BsmtFinSF2")
+```
+
+## TotalBsmtSF: Total square feet of basement
+skewness = 1.5242545490627664
+```{python}
+contvssale(contvar="TotalBsmtSF",df=df)
+```
+
+## GrLivArea: Above grade (ground) living area square feet
+skewness = 1.3665603560164552.
+The skewness of this data is accepable so no need to apply the log transfrom as it would make it negatively skewed.
+```{python}
+contvssale(contvar="GrLivArea",df=df)
+check_column_skewness(df,"GrLivArea")
+```
+
+## FullBath: Full bathrooms above grade
+From the regression plot as well as the boxplot we can conclude that the data is not skewed.
+It is a descrete variable as well.
+skewness = 0.036561558402727165
+```{python}
+check_column_skewness(df,"FullBath")
+catgvssale(catgvar="FullBath",df=df)
+```
+
+## BedroomAbvGr: Bedrooms above grade 
+It appears as a continuous column but according to its bar graph it is clear that it is descrete.
+```{python}
+catgvssale(catgvar="BedroomAbvGr",df=df)
+```
+
+## KitchenAbvGr: Kitchens above grade 
+```{python}
+catgvssale(catgvar="KitchenAbvGr",df=df)
+```
+
+## TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)
+From the below info we can see that the data is under the skew limit and the graph is normal.
+skewness = 0.6763408364355531
+```{python}
+check_column_skewness(df,"TotRmsAbvGrd")
+catgvssale(catgvar="TotRmsAbvGrd",df=df)
+```
+
+## Fireplaces: Number of fireplaces
+The data is under the skewness limit of 1.
+It can be seen from the graphs as well.
+skewness = 0.6495651830548841
+```{python}
+contvssale(contvar="Fireplaces",df=df)
+check_column_skewness(df,"Fireplaces")
+catgvssale(catgvar="Fireplaces",df=df)
+```
+
+## GarageCars: Size of garage in car capacity
+From the below visualization it can be predicted that this data column is not skewed its normal.
+
+skewness = -0.3425489297486655
+```{python}
+contvssale(contvar="GarageCars",df=df)
+check_column_skewness(df,"GarageCars")
+catgvssale(catgvar="GarageCars",df=df)
+```
+
+## GarageArea: Size of garage in square feet
+skewness = 0.17998090674623907
+
+Data column is acceptable.
+```{python}
+contvssale(contvar="GarageArea",df=df)
+check_column_skewness(df,"GarageArea")
+```
+
+## garagecars vs garage area 
+```{python}
+contvscont(contvar="GarageArea",df=df,tarvar="GarageCars")
+```
+
+## OpenPorchSF: Open porch area in square feet(best)
+skewness = 2.3643417403694404 
+
+skewness after = -0.02339729485739231
+```{python}
+check_column_skewness(df,"OpenPorchSF")
+remove_skewness(df,"OpenPorchSF")
+temp_df=temp_df = df.loc[df['OpenPorchSF']!=0]
+contvssale(contvar="OpenPorchSF",df=temp_df)
+```
+
+## ScreenPorch: Screen porch area in square feet
+skewness before transform = 4.122213743143115
+
+just after removing the 0 values the skewness came upto 1.186468489847003.
+
+after removing the skewness values of the temp_df we get it -0.40 .
+```{python}
+check_column_skewness(df,"ScreenPorch")
+temp_df=temp_df = df.loc[df['ScreenPorch']!=0]
+contvssale(contvar="ScreenPorch",df=temp_df)
+check_column_skewness(temp_df,"ScreenPorch")
+```
+
+## current age of the buildings according to the YearRemodAdd
+```{python}
+temp_df = df
+current_year = datetime.now().year
+
+temp_df['Age']= current_year-df['YearRemodAdd']
+#print(temp_df)
+temp_df['Age']
+contvscont(contvar='Age',df=temp_df,tarvar='SalePrice')
+```
+
+## Age of the building acc to the yearsold
+```{python}
+temp_df['tempAge']= df['YrSold']-df['YearRemodAdd']
+#print(temp_df)
+temp_df['tempAge']
+contvssale(contvar="tempAge",df=temp_df)
+```
+
+## garage year built
+```{python}
+temp_df = df
+current_year = datetime.now().year
+
+temp_df['GarAgeYr']= current_year-df['GarageYrBlt']
+temp_df['GarAgeYr']
+contvssale(contvar='GarAgeYr',df=temp_df)
 ```
