@@ -10,7 +10,7 @@ def contvssale(contvar: str, df: pd.DataFrame , tarvar = "SalePrice"):
     l = df[contvar].value_counts()
     s = df[tarvar].value_counts()
 
-    fig, axes = plt.subplots(2,2,figsize=(10,10))
+    fig, axes = plt.subplots(2,2,figsize=(13,13))
     #fig.tight_layout(pad=5,w_pad=5)
     fig.suptitle(f"{contvar} vs {tarvar}")
 
@@ -102,3 +102,13 @@ def plot_contv(contvar: str, df: pd.DataFrame):
     
     sb.boxplot(ax = axes[1],data = df,x=contvar)
 
+
+
+def remove_ngskewness(data, column_name):
+    column_values = data[column_name]
+    skewness = column_values.skew()
+    if skewness < -0.9:
+        column_values = np.log1p(column_values)
+
+    data[column_name] = column_values
+    return data
