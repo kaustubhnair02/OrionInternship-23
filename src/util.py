@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sb
+from sklearn.preprocessing import LabelEncoder
+from scipy.stats import skew
 
 
 def contvssale(contvar: str, df: pd.DataFrame , tarvar = "SalePrice"):
@@ -112,3 +114,36 @@ def remove_ngskewness(data, column_name):
 
     data[column_name] = column_values
     return data
+
+def log_transform_continuous(dataset, continuous_vars):
+    transformed_dataset = dataset.copy()
+
+    for var in continuous_vars:
+        # Compute skewness
+        skewness = skew(transformed_dataset[var])
+
+        if skewness > 1:
+            # Perform log transform
+            transformed_dataset[var] = np.log1p(transformed_dataset[var])
+
+    return transformed_dataset
+
+def one_hot_encode_nominal(dataset, nominal_vars):
+    encoded_dataset = dataset.copy()
+
+    for var in nominal_vars:
+        # Perform one-hot encoding
+        encoded_columns = pd.get_dummies(encoded_dataset[var], prefix=var, drop_first=True)
+        encoded_columns = encoded_columns.astype(int)
+        encoded_dataset = pd.concat([encoded_dataset, encoded_columns], axis=1)
+        encoded_dataset.drop(columns=var,inplace=True)
+        
+    return encoded_dataset
+
+def label_encode_dataset(dataset, ordinal_vars):
+    label_encoder = LabelEncoder()
+
+    for col in ordinal_vars:
+        dataset[col] = label_encoder.fit_transform(dataset[col])
+
+    return dataset
