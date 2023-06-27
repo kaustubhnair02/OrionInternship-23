@@ -1,0 +1,81 @@
+variable,variable_type,variable_description
+MSSubClass,Nominal, Identifies the type of dwelling involved in the sale.
+MSZoning,Nominal, Identifies the general zoning classification of the sale.
+LotFrontage,Continuous, Linear feet of street connected to property
+LotArea,Continuous, Lot size in square feet
+Street,Nominal, Type of road access to property
+Alley,Nominal, Type of alley access to property
+LotShape,Ordinal, General shape of property
+LandContour,Nominal, Flatness of the property
+Utilities,Ordinal, Type of utilities available
+LotConfig,Nominal, Lot configuration
+LandSlope,Ordinal, Slope of property
+Neighborhood,Nominal, Physical locations within Ames city limits
+Condition1,Nominal, Proximity to various conditions
+Condition2,Nominal, Proximity to various conditions (if more than one is present)
+BldgType,Nominal, Type of dwelling
+HouseStyle,Nominal, Style of dwelling
+OverallQual,Ordinal, Rates the overall material and finish of the house
+OverallCond,Ordinal, Rates the overall condition of the house
+YearBuilt,Discrete, Original construction date
+YearRemodAdd,Discrete, Remodel date (same as construction date if no remodeling or additions)
+RoofStyle,Nominal, Type of roof
+RoofMatl,Nominal, Roof material
+Exterior1st,Nominal, Exterior covering on house
+Exterior2nd,Nominal, Exterior covering on house (if more than one material)
+MasVnrType,Nominal, Masonry veneer type
+MasVnrArea,Continuous, Masonry veneer area in square feet
+ExterQual,Ordinal, Evaluates the quality of the material on the exterior 
+ExterCond,Ordinal, Evaluates the present condition of the material on the exterior
+Foundation,Nominal, Type of foundation
+BsmtQual,Ordinal, Evaluates the height of the basement
+BsmtCond,Ordinal, Evaluates the general condition of the basement
+BsmtExposure,Ordinal, Refers to walkout or garden level walls
+BsmtFinType1,Ordinal, Rating of basement finished area
+BsmtFinSF1,Continuous, Type 1 finished square feet
+BsmtFinType2,Ordinal, Rating of basement finished area (if multiple types)
+BsmtFinSF2,Continuous, Type 2 finished square feet
+BsmtUnfSF,Continuous, Unfinished square feet of basement area
+TotalBsmtSF,Continuous, Total square feet of basement area
+Heating,Nominal, Type of heating
+HeatingQC,Ordinal, Heating quality and condition
+CentralAir,Nominal, Central air conditioning
+Electrical,Ordinal, Electrical system
+1stFlrSF,Continuous, First Floor square feet
+2ndFlrSF,Continuous, Second floor square feet
+LowQualFinSF,Continuous, Low quality finished square feet (all floors)
+GrLivArea,Continuous, Above grade (ground) living area square feet
+BsmtFullBath,Discrete, Basement full bathrooms
+BsmtHalfBath,Discrete, Basement half bathrooms
+FullBath,Discrete, Full bathrooms above grade
+HalfBath,Discrete, Half baths above grade
+BedroomAbvGr,Discrete, Bedrooms above grade (does NOT include basement bedrooms)
+KitchenAbvGr,Discrete, Kitchens above grade
+KitchenQual,Ordinal, Kitchen quality
+TotRmsAbvGrd,Discrete, Total rooms above grade (does not include bathrooms)
+Functional,Ordinal, Home functionality (Assume typical unless deductions are warranted)
+Fireplaces,Discrete, Number of fireplaces
+FireplaceQu,Ordinal, Fireplace quality
+GarageType,Nominal, Garage location
+GarageYrBlt,Discrete, Year garage was built
+GarageFinish,Ordinal, Interior finish of the garage
+GarageCars,Discrete, Size of garage in car capacity
+GarageArea,Continuous, Size of garage in square feet
+GarageQual,Ordinal, Garage quality
+GarageCond,Ordinal, Garage condition
+PavedDrive,Ordinal, Paved driveway
+WoodDeckSF,Continuous, Wood deck area in square feet
+OpenPorchSF,Continuous, Open porch area in square feet
+EnclosedPorch,Continuous, Enclosed porch area in square feet
+3SsnPorch,Continuous, Three season porch area in square feet
+ScreenPorch,Continuous, Screen porch area in square feet
+PoolArea,Continuous, Pool area in square feet
+PoolQC,Ordinal, Pool quality
+Fence,Ordinal, Fence quality
+MiscFeature,Nominal, Miscellaneous feature not covered in other categories
+MiscVal,Continuous, $Value of miscellaneous feature
+MoSold,Discrete, Month Sold (MM)
+YrSold,Discrete, Year Sold (YYYY)
+SaleType,Nominal, Type of sale
+SaleCondition,Nominal, Condition of sale
+SalePrice,Continuous,Sale price in USD
