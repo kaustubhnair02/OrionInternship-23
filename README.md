@@ -20,7 +20,9 @@ You can view my report on the same by visiting the link :- https://kaustubhnair2
 
 # Requirements:
 Python 3.9.12
+
 Quarto 1.3.353
+
 requirement.txt
 
 # AEMS House Prediction Model - Summer Internship
@@ -36,7 +38,6 @@ The AEMS House Prediction Model is a data science project aimed at developing a 
    - Step 4: Feature Engineering
    - Step 5: Model Selection
    - Step 6: Model Training and Evaluation
-   - Step 7: Model Deployment
 4. Experience
 
 ## 1. Introduction
@@ -68,9 +69,6 @@ In this step, I explored various machine learning algorithms and evaluated their
 
 ### Step 6: Model Training and Evaluation
 Once the model was selected, I split the dataset into training and testing sets. I trained the model on the training set and evaluated its performance on the testing set using metrics such as mean squared error (MSE) and R-squared.
-
-### Step 7: Model Deployment
-After achieving satisfactory model performance, I deployed the model to make predictions on new, unseen data. This involved saving the trained model and developing an interface to accept input features and provide house price predictions.
 
 ## 4. Experience
 During this summer internship, I had the opportunity to work on a real-world data science project and gain hands-on experience in various aspects of the data science lifecycle. It was a challenging yet rewarding experience that allowed me to apply my knowledge and skills in Python programming, data manipulation, exploratory data analysis, and machine learning.
