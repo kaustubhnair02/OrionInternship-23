@@ -1,31 +1,18 @@
 ---
-title: "Quarto Basics"
+title: "Orion Summer Internship (House Price Prediction Model)"
+author: Kaustubh S Nair
+date: last-modified
 format:
   gfm:
+    code-tools: true
     code-fold: true
+    theme: sky
 #jupyter: OSI-23.venv\Scripts\python.exe
 ---
 
-For a demonstration of a line plot on a polar axis, see @fig-polar.
+## 🎯The AEMS (Advanced Estate Management System) House Prediction Regression Model is a machine learning-based system designed to accurately predict house prices. The model leverages regression algorithms and advanced data analysis techniques to estimate the monetary value of residential properties based on a variety of input features. By analyzing historical data and learning from patterns, the AEMS model aims to provide reliable and precise predictions, facilitating informed decision-making in the real estate industry.The model incorporates various stages of data preprocessing and feature engineering to handle missing values, outliers, and transform variables into a suitable format for regression analysis. Techniques such as log transformation, one-hot encoding, and label encoding are applied to ensure the optimal representation of the data. The model also employs advanced regression algorithms, such as linear regression, decision trees, random forests, or gradient boosting, to capture complex relationships and accurately estimate house prices.
 
-```{python}
-#| label: fig-polar
-#| fig-cap: "A line plot on a polar axis"
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-r = np.arange(0, 2, 0.01)
-theta = 4 * np.pi * r
-fig, ax = plt.subplots(
-  subplot_kw = {'projection': 'polar'} 
-)
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
-```
-
+ 
 
 ```{python}
 import os
@@ -46,11 +33,13 @@ import numpy as np
 import pandas as pd
 import seaborn as sb
 from sklearn.preprocessing import LabelEncoder
-from src.util import catgvssale,contvssale,contvscont,check_column_skewness,remove_skewness,plot_contv,remove_ngskewness
+from src.util import catgvssale,contvssale,contvscont,check_column_skewness,remove_skewness,plot_contv,remove_ngskewness,log_transform_continuous,one_hot_encode_nominal,label_encode_dataset,preprocess_dataset
 from datetime import datetime
 df = pd.read_csv( "data/raw/train.csv")
 temp_df=df
 ```
+
+## 🎯PRE-PROCESSING & EDA : EDA (Exploratory Data Analysis) and preprocessing play crucial roles in the development of the AEMS House Prediction Regression Model. These stages involve thorough analysis, cleaning, and transformation of the dataset to ensure optimal data quality and feature representation. Analyze the distribution of numerical features and address skewness or non-normality by applying transformations like log transformation.Convert categorical variables into numerical representations using one-hot encoding or label encoding techniques, depending on the nature and cardinality of the variables.
 
 ```{python}
 numerics =['int16','int32','int64','float16','float32','float64']
@@ -296,3 +285,176 @@ temp_df['GarAgeYr']= current_year-df['GarageYrBlt']
 temp_df['GarAgeYr']
 contvssale(contvar='GarAgeYr',df=temp_df)
 ```
+
+## 🎯TRAINING AND EVALUATION : Split the preprocessed dataset into training and testing sets to evaluate the model's performance on unseen data.Ensure proper stratification if the dataset is imbalanced or if specific classes or categories need to be represented equally in both sets.
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sb
+from sklearn.preprocessing import LabelEncoder
+from src.util import catgvssale,contvssale,contvscont,check_column_skewness,remove_skewness,plot_contv,remove_ngskewness,preprocess_dataset
+from datetime import datetime
+from scipy.stats import skew
+from sklearn.linear_model import Lasso
+from sklearn.preprocessing import StandardScaler
+from sklearn.feature_selection import SelectPercentile, chi2
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+from sklearn.metrics import mean_squared_error
+import pickle
+```
+
+```{python}
+final_df = pd.read_csv('data/raw/train.csv')
+df1 =  pd.read_csv('data/raw/train.csv')
+lbl_dsc = pd.read_csv('data\clean\label_description.csv')
+var_dsc =  pd.read_csv('data/clean/variable_description.csv')
+```
+
+
+## Select the variables that are Nominal from var_dsc
+From the variable description file we are collecting only the variables that are nominal so that we can add it to the list of nominal data.
+```{python}
+nominal_df = var_dsc.loc[var_dsc['variable_type'] == 'Nominal']
+#print(ordinal_df)
+#nominal_df.head(30)
+nominal_list = nominal_df['variable'].to_list()
+print(nominal_list)
+nominal_list.remove("MiscFeature")
+nominal_list.remove("Alley")
+nominal_list.remove("MSSubClass")
+print(nominal_list)
+```
+
+## Select the variables that are Ordinal from var_dsc
+From the variable description file we are collecting only the variables that are ordinal so that we can add it to the list of ordinal data.
+```{python}
+ordinal_df = var_dsc.loc[var_dsc['variable_type'] == 'Ordinal']
+#print(ordinal_df)
+ordinal_df.head(24)
+ordinal_list = ordinal_df['variable'].to_list()
+print(ordinal_list)
+ordinal_list.remove("PoolQC")
+ordinal_list.remove("Fence")
+print(ordinal_list)
+```
+
+## Select the variables that are Continuous from var_dsc
+From the variable description file we are collecting only the variables that are continuous so that we can add it to the list of continuous data.
+```{python}
+cont_df = var_dsc.loc[var_dsc['variable_type'] == 'Continuous']
+cont_list = cont_df['variable'].to_list()
+print(cont_list)
+```
+
+## Creating arguments for the function to be used
+```{python}
+ordinal_vars = ordinal_list
+continuous_vars = cont_list
+nominal_vars =  nominal_list
+```
+
+## Dropping the columns with the most missing ratio
+```{python}
+df1 = df1.drop(['Alley','PoolQC','MiscFeature','Fence'],axis=1)
+df1.fillna(0)
+print('Dropped columns are : Alley,PoolQC,MiscFeature,Fence')
+```
+
+## Applying labelencoding , one hot encoding and log tranfromation on the above generated lists
+We apply labelencoding for the ordinal variables, one hot encoding for the nominal variables and log transformation for the continuous variables.
+```{python}
+def preprocess_dataset(dataset, continuous_vars, nominal_vars, ordinal_vars):
+    print(dataset.shape)
+    transformed_dataset = log_transform_continuous(dataset, continuous_vars)
+    print(transformed_dataset.shape)
+    encoded_dataset = one_hot_encode_nominal(transformed_dataset, nominal_vars)
+    print(encoded_dataset.shape)
+    preprocessed_dataset = label_encode_dataset(encoded_dataset, ordinal_vars)
+    print(preprocessed_dataset.shape)
+    return preprocessed_dataset
+final_data = preprocess_dataset(df1, continuous_vars, nominal_vars, ordinal_vars)
+
+```
+
+## Splitting the data 
+```{python}
+columnindex = final_data.columns.get_loc('SalePrice')
+print(columnindex)
+
+X1 = final_data.iloc[:,0:columnindex]
+y = final_data.iloc[:,columnindex]
+X2 = final_data.iloc[:,(columnindex + 1):192]
+X = pd.concat([X1,X2],axis=1)
+X = X.fillna(0)
+X.drop('Id',axis=1)
+X
+```
+
+## MODEL 1 :Linear Regression Model With the Mutual Information Data
+```{python}
+from sklearn.linear_model import LinearRegression
+from sklearn.feature_selection import SelectKBest, mutual_info_regression
+from sklearn.model_selection import train_test_split
+# Split the data into features (X) and target variable (y)
+
+# Apply SelectKBest feature selection
+k = 170 # Number of top features to select
+selector = SelectKBest(score_func=mutual_info_regression, k=k)
+X_selected = selector.fit_transform(X, y)
+
+X_train, X_test, y_train, y_test = train_test_split(X_selected, y, test_size=0.3, random_state=42)
+
+
+# Get selected feature names
+#selected_feature_names = X.columns[selector.get_support()].tolist()
+
+# Fit a linear regression model using the selected features
+linear_regression = LinearRegression()
+linear_regression.fit(X_train, y_train)
+
+y_pred = linear_regression.predict(X_test)
+
+y_predsp = np.expm1(y_pred)
+y_testsp = np.expm1(y_test)
+
+```
+
+## Scores 
+```{python}
+mse = mean_squared_error(y_testsp, y_predsp)
+r2 = r2_score(y_testsp, y_predsp)
+rmse = mean_squared_error(y_testsp, y_predsp,squared=False)
+print("Mean Squared Error (RMSE) on train set:", mse)
+print("Root Mean Squared Error (MSE) on train set:", rmse)
+print("R-squared score on train set:", r2)
+le = round(linear_regression.score(X_test,y_test), 2)
+print(le)
+```
+
+## MODEL 2 :RandomForest Regression 
+```{python}
+from sklearn.ensemble import RandomForestRegressor
+X_train, X_test, y_train, y_test = train_test_split(X_selected, y, test_size=0.3, random_state=42)
+# create regressor object
+regressor = RandomForestRegressor(n_estimators=100,random_state=0,oob_score=True)
+ 
+# fit the regressor with x and y data
+regressor.fit(X_train, y_train)
+Y_pred = regressor.predict(X_test)
+Y_predsp = np.expm1(Y_pred)
+Y_testsp = np.expm1(y_test)
+```
+
+## Scores of the RandomForest Regression
+```{python}
+print(regressor.oob_score_)
+r2 = r2_score(Y_testsp, Y_predsp)
+rmse = mean_squared_error(Y_testsp, Y_predsp,squared=False)
+print("R-squared score on train set:", r2)
+print("Root Mean Squared Error (MSE) on train set:", rmse)
+```
+
+## ➡️CONCLUSION : From the above insights on the various scores and rmse and r2 values we can conclude that linear regression model with the mutual information data will be the most suitable for this house price prediction model.  
