@@ -147,3 +147,13 @@ def label_encode_dataset(dataset, ordinal_vars):
         dataset[col] = label_encoder.fit_transform(dataset[col])
 
     return dataset
+
+def preprocess_dataset(dataset, continuous_vars, nominal_vars, ordinal_vars):
+    print(f"shape of original dataset {dataset.shape}")
+    transformed_dataset = log_transform_continuous(dataset, continuous_vars)
+    print(f"shape of log transformed dataset {transformed_dataset.shape}")
+    encoded_dataset = one_hot_encode_nominal(transformed_dataset, nominal_vars)
+    print(f"shape of one hot encoded  dataset {encoded_dataset.shape}")
+    preprocessed_dataset = label_encode_dataset(encoded_dataset, ordinal_vars)
+    print(f"shape of label encoded dataset {preprocessed_dataset.shape}")
+    return preprocessed_dataset
