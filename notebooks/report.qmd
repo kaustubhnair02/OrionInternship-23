@@ -1,17 +1,17 @@
 ---
 title: "Orion Summer Internship (House Price Prediction Model)"
+theme: solarized-light
 author: Kaustubh S Nair
 date: last-modified
 format:
   gfm:
     code-tools: true
     code-fold: true
-    theme: sky
     toc: true
 #jupyter: OSI-23.venv\Scripts\python.exe
 ---
 
-## 🎯The AEMS (Advanced Estate Management System)
+# 🎯The AEMS (Advanced Estate Management System)
  House Prediction Regression Model is a machine learning-based system designed to accurately predict house prices. The model leverages regression algorithms and advanced data analysis techniques to estimate the monetary value of residential properties based on a variety of input features. By analyzing historical data and learning from patterns, the AEMS model aims to provide reliable and precise predictions, facilitating informed decision-making in the real estate industry.The model incorporates various stages of data preprocessing and feature engineering to handle missing values, outliers, and transform variables into a suitable format for regression analysis. Techniques such as log transformation, one-hot encoding, and label encoding are applied to ensure the optimal representation of the data. The model also employs advanced regression algorithms, such as linear regression, decision trees, random forests, or gradient boosting, to capture complex relationships and accurately estimate house prices.
 
  
@@ -41,7 +41,7 @@ df = pd.read_csv( "data/raw/train.csv")
 temp_df=df
 ```
 
-## 🎯PRE-PROCESSING & EDA : 
+# 🎯PRE-PROCESSING & EDA : 
 EDA (Exploratory Data Analysis) and preprocessing play crucial roles in the development of the AEMS House Prediction Regression Model. These stages involve thorough analysis, cleaning, and transformation of the dataset to ensure optimal data quality and feature representation. Analyze the distribution of numerical features and address skewness or non-normality by applying transformations like log transformation.Convert categorical variables into numerical representations using one-hot encoding or label encoding techniques, depending on the nature and cardinality of the variables.
 
 ```{python}
@@ -178,7 +178,8 @@ contvssale(contvar="TotalBsmtSF",df=df)
 ```
 
 ## GrLivArea: Above grade (ground) living area square feet
-skewness = 1.3665603560164552.
+Skewness = 1.3665603560164552.
+
 The skewness of this data is accepable so no need to apply the log transfrom as it would make it negatively skewed.
 ```{python}
 contvssale(contvar="GrLivArea",df=df)
@@ -187,8 +188,10 @@ check_column_skewness(df,"GrLivArea")
 
 ## FullBath: Full bathrooms above grade
 From the regression plot as well as the boxplot we can conclude that the data is not skewed.
+
 It is a descrete variable as well.
-skewness = 0.036561558402727165
+
+Skewness = 0.036561558402727165
 ```{python}
 check_column_skewness(df,"FullBath")
 catgvssale(catgvar="FullBath",df=df)
@@ -207,7 +210,8 @@ catgvssale(catgvar="KitchenAbvGr",df=df)
 
 ## TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)
 From the below info we can see that the data is under the skew limit and the graph is normal.
-skewness = 0.6763408364355531
+
+Skewness = 0.6763408364355531
 ```{python}
 check_column_skewness(df,"TotRmsAbvGrd")
 catgvssale(catgvar="TotRmsAbvGrd",df=df)
@@ -215,7 +219,9 @@ catgvssale(catgvar="TotRmsAbvGrd",df=df)
 
 ## Fireplaces: Number of fireplaces
 The data is under the skewness limit of 1.
+
 It can be seen from the graphs as well.
+
 skewness = 0.6495651830548841
 ```{python}
 contvssale(contvar="Fireplaces",df=df)
@@ -259,11 +265,11 @@ contvssale(contvar="OpenPorchSF",df=temp_df)
 ```
 
 ## ScreenPorch: Screen porch area in square feet
-skewness before transform = 4.122213743143115
+Skewness before transform = 4.122213743143115
 
-just after removing the 0 values the skewness came upto 1.186468489847003.
+Just after removing the 0 values the skewness came upto 1.186468489847003.
 
-after removing the skewness values of the temp_df we get it -0.40 .
+After removing the skewness values of the temp_df we get it -0.40 .
 ```{python}
 check_column_skewness(df,"ScreenPorch")
 temp_df=temp_df = df.loc[df['ScreenPorch']!=0]
@@ -300,7 +306,8 @@ temp_df['GarAgeYr']
 contvssale(contvar='GarAgeYr',df=temp_df)
 ```
 
-## 🎯TRAINING AND EVALUATION : Split the preprocessed dataset into training and testing sets to evaluate the model's performance on unseen data.Ensure proper stratification if the dataset is imbalanced or if specific classes or categories need to be represented equally in both sets.
+# 🎯TRAINING AND EVALUATION : 
+Split the preprocessed dataset into training and testing sets to evaluate the model's performance on unseen data.Ensure proper stratification if the dataset is imbalanced or if specific classes or categories need to be represented equally in both sets.
 
 ```{python}
 import numpy as np
@@ -407,7 +414,8 @@ X.drop('Id',axis=1)
 X
 ```
 
-## MODEL 1 :Linear Regression Model With the Mutual Information Data
+# MODEL 1 :
+Linear Regression Model With the Mutual Information Data
 ```{python}
 from sklearn.linear_model import LinearRegression
 from sklearn.feature_selection import SelectKBest, mutual_info_regression
@@ -448,7 +456,8 @@ le = round(linear_regression.score(X_test,y_test), 2)
 print(le)
 ```
 
-## MODEL 2 :RandomForest Regression 
+# MODEL 2 :
+RandomForest Regression 
 ```{python}
 from sklearn.ensemble import RandomForestRegressor
 X_train, X_test, y_train, y_test = train_test_split(X_selected, y, test_size=0.3, random_state=42)
@@ -471,4 +480,5 @@ print("R-squared score on train set:", r2)
 print("Root Mean Squared Error (MSE) on train set:", rmse)
 ```
 
-## ➡️CONCLUSION : From the above insights on the various scores and rmse and r2 values we can conclude that linear regression model with the mutual information data will be the most suitable for this house price prediction model.  
+# ➡️CONCLUSION : 
+From the above insights on the various scores and rmse and r2 values we can conclude that linear regression model with the mutual information data will be the most suitable for this house price prediction model.  

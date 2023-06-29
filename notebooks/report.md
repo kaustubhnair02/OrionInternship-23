@@ -5,78 +5,68 @@ Kaustubh S Nair
 - [🎯The AEMS (Advanced Estate Management
   System)](#the-aems-advanced-estate-management-system)
 - [🎯PRE-PROCESSING & EDA :](#pre-processing-eda)
-- [Columns with NO Missing_Values](#columns-with-no-missing_values)
-- [Target:SalePrie](#targetsaleprie)
-- [MSSubClass](#mssubclass)
-- [LotFrontage](#lotfrontage)
-- [LotArea](#lotarea)
-- [YearBuilt](#yearbuilt)
-- [YearRemodAdd](#yearremodadd)
-- [YearRemodAdd vs YearBuilt](#yearremodadd-vs-yearbuilt)
-- [MasVnrArea](#masvnrarea)
-- [BsmtFinSF1–](#bsmtfinsf1)
-- [BsmtFinSF2: Type 2 finished square
-  feet](#bsmtfinsf2-type-2-finished-square-feet)
-- [TotalBsmtSF: Total square feet of
-  basement](#totalbsmtsf-total-square-feet-of-basement)
-- [GrLivArea: Above grade (ground) living area square
-  feet](#grlivarea-above-grade-ground-living-area-square-feet)
-- [FullBath: Full bathrooms above
-  grade](#fullbath-full-bathrooms-above-grade)
-- [BedroomAbvGr: Bedrooms above
-  grade](#bedroomabvgr-bedrooms-above-grade)
-- [KitchenAbvGr: Kitchens above
-  grade](#kitchenabvgr-kitchens-above-grade)
-- [TotRmsAbvGrd: Total rooms above grade (does not include
-  bathrooms)](#totrmsabvgrd-total-rooms-above-grade-does-not-include-bathrooms)
-- [Fireplaces: Number of fireplaces](#fireplaces-number-of-fireplaces)
-- [GarageCars: Size of garage in car
-  capacity](#garagecars-size-of-garage-in-car-capacity)
-- [GarageArea: Size of garage in square
-  feet](#garagearea-size-of-garage-in-square-feet)
-- [garagecars vs garage area](#garagecars-vs-garage-area)
-- [OpenPorchSF: Open porch area in square
-  feet(best)](#openporchsf-open-porch-area-in-square-feetbest)
-- [ScreenPorch: Screen porch area in square
-  feet](#screenporch-screen-porch-area-in-square-feet)
-- [current age of the buildings according to the
-  YearRemodAdd](#current-age-of-the-buildings-according-to-the-yearremodadd)
-- [Age of the building acc to the
-  yearsold](#age-of-the-building-acc-to-the-yearsold)
-- [garage year built](#garage-year-built)
-- [🎯TRAINING AND EVALUATION : Split the preprocessed dataset into
-  training and testing sets to evaluate the model’s performance on
-  unseen data.Ensure proper stratification if the dataset is imbalanced
-  or if specific classes or categories need to be represented equally in
-  both
-  sets.](#training-and-evaluation-split-the-preprocessed-dataset-into-training-and-testing-sets-to-evaluate-the-models-performance-on-unseen-data.ensure-proper-stratification-if-the-dataset-is-imbalanced-or-if-specific-classes-or-categories-need-to-be-represented-equally-in-both-sets.)
-- [Select the variables that are Nominal from
-  var_dsc](#select-the-variables-that-are-nominal-from-var_dsc)
-- [Select the variables that are Ordinal from
-  var_dsc](#select-the-variables-that-are-ordinal-from-var_dsc)
-- [Select the variables that are Continuous from
-  var_dsc](#select-the-variables-that-are-continuous-from-var_dsc)
-- [Creating arguments for the function to be
-  used](#creating-arguments-for-the-function-to-be-used)
-- [Dropping the columns with the most missing
-  ratio](#dropping-the-columns-with-the-most-missing-ratio)
-- [Applying labelencoding , one hot encoding and log tranfromation on
-  the above generated
-  lists](#applying-labelencoding-one-hot-encoding-and-log-tranfromation-on-the-above-generated-lists)
-- [Splitting the data](#splitting-the-data)
-- [MODEL 1 :Linear Regression Model With the Mutual Information
-  Data](#model-1-linear-regression-model-with-the-mutual-information-data)
-- [Scores](#scores)
-- [MODEL 2 :RandomForest Regression](#model-2-randomforest-regression)
-- [Scores of the RandomForest
-  Regression](#scores-of-the-randomforest-regression)
-- [➡️CONCLUSION : From the above insights on the various scores and rmse
-  and r2 values we can conclude that linear regression model with the
-  mutual information data will be the most suitable for this house price
-  prediction
-  model.](#conclusion-from-the-above-insights-on-the-various-scores-and-rmse-and-r2-values-we-can-conclude-that-linear-regression-model-with-the-mutual-information-data-will-be-the-most-suitable-for-this-house-price-prediction-model.)
+  - [Columns with NO Missing_Values](#columns-with-no-missing_values)
+  - [Target:SalePrie](#targetsaleprie)
+  - [MSSubClass](#mssubclass)
+  - [LotFrontage](#lotfrontage)
+  - [LotArea](#lotarea)
+  - [YearBuilt](#yearbuilt)
+  - [YearRemodAdd](#yearremodadd)
+  - [YearRemodAdd vs YearBuilt](#yearremodadd-vs-yearbuilt)
+  - [MasVnrArea](#masvnrarea)
+  - [BsmtFinSF1–](#bsmtfinsf1)
+  - [BsmtFinSF2: Type 2 finished square
+    feet](#bsmtfinsf2-type-2-finished-square-feet)
+  - [TotalBsmtSF: Total square feet of
+    basement](#totalbsmtsf-total-square-feet-of-basement)
+  - [GrLivArea: Above grade (ground) living area square
+    feet](#grlivarea-above-grade-ground-living-area-square-feet)
+  - [FullBath: Full bathrooms above
+    grade](#fullbath-full-bathrooms-above-grade)
+  - [BedroomAbvGr: Bedrooms above
+    grade](#bedroomabvgr-bedrooms-above-grade)
+  - [KitchenAbvGr: Kitchens above
+    grade](#kitchenabvgr-kitchens-above-grade)
+  - [TotRmsAbvGrd: Total rooms above grade (does not include
+    bathrooms)](#totrmsabvgrd-total-rooms-above-grade-does-not-include-bathrooms)
+  - [Fireplaces: Number of fireplaces](#fireplaces-number-of-fireplaces)
+  - [GarageCars: Size of garage in car
+    capacity](#garagecars-size-of-garage-in-car-capacity)
+  - [GarageArea: Size of garage in square
+    feet](#garagearea-size-of-garage-in-square-feet)
+  - [garagecars vs garage area](#garagecars-vs-garage-area)
+  - [OpenPorchSF: Open porch area in square
+    feet(best)](#openporchsf-open-porch-area-in-square-feetbest)
+  - [ScreenPorch: Screen porch area in square
+    feet](#screenporch-screen-porch-area-in-square-feet)
+  - [current age of the buildings according to the
+    YearRemodAdd](#current-age-of-the-buildings-according-to-the-yearremodadd)
+  - [Age of the building acc to the
+    yearsold](#age-of-the-building-acc-to-the-yearsold)
+  - [garage year built](#garage-year-built)
+- [🎯TRAINING AND EVALUATION :](#training-and-evaluation)
+  - [Select the variables that are Nominal from
+    var_dsc](#select-the-variables-that-are-nominal-from-var_dsc)
+  - [Select the variables that are Ordinal from
+    var_dsc](#select-the-variables-that-are-ordinal-from-var_dsc)
+  - [Select the variables that are Continuous from
+    var_dsc](#select-the-variables-that-are-continuous-from-var_dsc)
+  - [Creating arguments for the function to be
+    used](#creating-arguments-for-the-function-to-be-used)
+  - [Dropping the columns with the most missing
+    ratio](#dropping-the-columns-with-the-most-missing-ratio)
+  - [Applying labelencoding , one hot encoding and log tranfromation on
+    the above generated
+    lists](#applying-labelencoding-one-hot-encoding-and-log-tranfromation-on-the-above-generated-lists)
+  - [Splitting the data](#splitting-the-data)
+- [MODEL 1 :](#model-1)
+  - [Scores](#scores)
+- [MODEL 2 :](#model-2)
+  - [Scores of the RandomForest
+    Regression](#scores-of-the-randomforest-regression)
+- [➡️CONCLUSION :](#conclusion)
 
-## 🎯The AEMS (Advanced Estate Management System)
+# 🎯The AEMS (Advanced Estate Management System)
 
 House Prediction Regression Model is a machine learning-based system
 designed to accurately predict house prices. The model leverages
@@ -130,7 +120,7 @@ temp_df=df
 
 </details>
 
-## 🎯PRE-PROCESSING & EDA :
+# 🎯PRE-PROCESSING & EDA :
 
 EDA (Exploratory Data Analysis) and preprocessing play crucial roles in
 the development of the AEMS House Prediction Regression Model. These
@@ -478,9 +468,10 @@ contvssale(contvar="TotalBsmtSF",df=df)
 
 ## GrLivArea: Above grade (ground) living area square feet
 
-skewness = 1.3665603560164552. The skewness of this data is accepable so
-no need to apply the log transfrom as it would make it negatively
-skewed.
+Skewness = 1.3665603560164552.
+
+The skewness of this data is accepable so no need to apply the log
+transfrom as it would make it negatively skewed.
 
 <details>
 <summary>Code</summary>
@@ -499,8 +490,11 @@ check_column_skewness(df,"GrLivArea")
 ## FullBath: Full bathrooms above grade
 
 From the regression plot as well as the boxplot we can conclude that the
-data is not skewed. It is a descrete variable as well. skewness =
-0.036561558402727165
+data is not skewed.
+
+It is a descrete variable as well.
+
+Skewness = 0.036561558402727165
 
 <details>
 <summary>Code</summary>
@@ -546,7 +540,9 @@ catgvssale(catgvar="KitchenAbvGr",df=df)
 ## TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)
 
 From the below info we can see that the data is under the skew limit and
-the graph is normal. skewness = 0.6763408364355531
+the graph is normal.
+
+Skewness = 0.6763408364355531
 
 <details>
 <summary>Code</summary>
@@ -562,8 +558,11 @@ catgvssale(catgvar="TotRmsAbvGrd",df=df)
 
 ## Fireplaces: Number of fireplaces
 
-The data is under the skewness limit of 1. It can be seen from the
-graphs as well. skewness = 0.6495651830548841
+The data is under the skewness limit of 1.
+
+It can be seen from the graphs as well.
+
+skewness = 0.6495651830548841
 
 <details>
 <summary>Code</summary>
@@ -657,12 +656,12 @@ contvssale(contvar="OpenPorchSF",df=temp_df)
 
 ## ScreenPorch: Screen porch area in square feet
 
-skewness before transform = 4.122213743143115
+Skewness before transform = 4.122213743143115
 
-just after removing the 0 values the skewness came upto
+Just after removing the 0 values the skewness came upto
 1.186468489847003.
 
-after removing the skewness values of the temp_df we get it -0.40 .
+After removing the skewness values of the temp_df we get it -0.40 .
 
 <details>
 <summary>Code</summary>
@@ -733,7 +732,12 @@ contvssale(contvar='GarAgeYr',df=temp_df)
 
 ![](report_files/figure-commonmark/cell-31-output-1.png)
 
-## 🎯TRAINING AND EVALUATION : Split the preprocessed dataset into training and testing sets to evaluate the model’s performance on unseen data.Ensure proper stratification if the dataset is imbalanced or if specific classes or categories need to be represented equally in both sets.
+# 🎯TRAINING AND EVALUATION :
+
+Split the preprocessed dataset into training and testing sets to
+evaluate the model’s performance on unseen data.Ensure proper
+stratification if the dataset is imbalanced or if specific classes or
+categories need to be represented equally in both sets.
 
 <details>
 <summary>Code</summary>
@@ -946,7 +950,9 @@ X
 <p>1460 rows × 190 columns</p>
 </div>
 
-## MODEL 1 :Linear Regression Model With the Mutual Information Data
+# MODEL 1 :
+
+Linear Regression Model With the Mutual Information Data
 
 <details>
 <summary>Code</summary>
@@ -998,12 +1004,14 @@ print(le)
 
 </details>
 
-    Mean Squared Error (RMSE) on train set: 552398408.2734274
-    Root Mean Squared Error (MSE) on train set: 23503.157410727337
-    R-squared score on train set: 0.9208382077974444
-    0.91
+    Mean Squared Error (RMSE) on train set: 598605136.2463683
+    Root Mean Squared Error (MSE) on train set: 24466.40832338021
+    R-squared score on train set: 0.9142165243469312
+    0.87
 
-## MODEL 2 :RandomForest Regression
+# MODEL 2 :
+
+RandomForest Regression
 
 <details>
 <summary>Code</summary>
@@ -1038,8 +1046,12 @@ print("Root Mean Squared Error (MSE) on train set:", rmse)
 
 </details>
 
-    0.8554202802584413
-    R-squared score on train set: 0.889683331900271
-    Root Mean Squared Error (MSE) on train set: 27745.270829356334
+    0.8553093374897831
+    R-squared score on train set: 0.8915723443966335
+    Root Mean Squared Error (MSE) on train set: 27506.696404314494
 
-## ➡️CONCLUSION : From the above insights on the various scores and rmse and r2 values we can conclude that linear regression model with the mutual information data will be the most suitable for this house price prediction model.
+# ➡️CONCLUSION :
+
+From the above insights on the various scores and rmse and r2 values we
+can conclude that linear regression model with the mutual information
+data will be the most suitable for this house price prediction model.
