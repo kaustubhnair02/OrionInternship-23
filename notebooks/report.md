@@ -1004,9 +1004,9 @@ print(le)
 
 </details>
 
-    Mean Squared Error (RMSE) on train set: 598605136.2463683
-    Root Mean Squared Error (MSE) on train set: 24466.40832338021
-    R-squared score on train set: 0.9142165243469312
+    Mean Squared Error (RMSE) on train set: 633980107.1355749
+    Root Mean Squared Error (MSE) on train set: 25178.96159764288
+    R-squared score on train set: 0.9091470924789873
     0.87
 
 # MODEL 2 :
@@ -1046,9 +1046,9 @@ print("Root Mean Squared Error (MSE) on train set:", rmse)
 
 </details>
 
-    0.8553093374897831
-    R-squared score on train set: 0.8915723443966335
-    Root Mean Squared Error (MSE) on train set: 27506.696404314494
+    0.8542231913516259
+    R-squared score on train set: 0.8913907523546405
+    Root Mean Squared Error (MSE) on train set: 27529.72054660918
 
 # ➡️CONCLUSION :
 

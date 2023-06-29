@@ -1,6 +1,6 @@
 ---
 title: "Orion Summer Internship (House Price Prediction Model)"
-theme: solarized-light
+theme: solarized-dark
 author: Kaustubh S Nair
 date: last-modified
 format:
