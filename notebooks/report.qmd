@@ -7,10 +7,12 @@ format:
     code-tools: true
     code-fold: true
     theme: sky
+    toc: true
 #jupyter: OSI-23.venv\Scripts\python.exe
 ---
 
-## 🎯The AEMS (Advanced Estate Management System) House Prediction Regression Model is a machine learning-based system designed to accurately predict house prices. The model leverages regression algorithms and advanced data analysis techniques to estimate the monetary value of residential properties based on a variety of input features. By analyzing historical data and learning from patterns, the AEMS model aims to provide reliable and precise predictions, facilitating informed decision-making in the real estate industry.The model incorporates various stages of data preprocessing and feature engineering to handle missing values, outliers, and transform variables into a suitable format for regression analysis. Techniques such as log transformation, one-hot encoding, and label encoding are applied to ensure the optimal representation of the data. The model also employs advanced regression algorithms, such as linear regression, decision trees, random forests, or gradient boosting, to capture complex relationships and accurately estimate house prices.
+## 🎯The AEMS (Advanced Estate Management System)
+ House Prediction Regression Model is a machine learning-based system designed to accurately predict house prices. The model leverages regression algorithms and advanced data analysis techniques to estimate the monetary value of residential properties based on a variety of input features. By analyzing historical data and learning from patterns, the AEMS model aims to provide reliable and precise predictions, facilitating informed decision-making in the real estate industry.The model incorporates various stages of data preprocessing and feature engineering to handle missing values, outliers, and transform variables into a suitable format for regression analysis. Techniques such as log transformation, one-hot encoding, and label encoding are applied to ensure the optimal representation of the data. The model also employs advanced regression algorithms, such as linear regression, decision trees, random forests, or gradient boosting, to capture complex relationships and accurately estimate house prices.
 
  
 
@@ -39,7 +41,8 @@ df = pd.read_csv( "data/raw/train.csv")
 temp_df=df
 ```
 
-## 🎯PRE-PROCESSING & EDA : EDA (Exploratory Data Analysis) and preprocessing play crucial roles in the development of the AEMS House Prediction Regression Model. These stages involve thorough analysis, cleaning, and transformation of the dataset to ensure optimal data quality and feature representation. Analyze the distribution of numerical features and address skewness or non-normality by applying transformations like log transformation.Convert categorical variables into numerical representations using one-hot encoding or label encoding techniques, depending on the nature and cardinality of the variables.
+## 🎯PRE-PROCESSING & EDA : 
+EDA (Exploratory Data Analysis) and preprocessing play crucial roles in the development of the AEMS House Prediction Regression Model. These stages involve thorough analysis, cleaning, and transformation of the dataset to ensure optimal data quality and feature representation. Analyze the distribution of numerical features and address skewness or non-normality by applying transformations like log transformation.Convert categorical variables into numerical representations using one-hot encoding or label encoding techniques, depending on the nature and cardinality of the variables.
 
 ```{python}
 numerics =['int16','int32','int64','float16','float32','float64']
@@ -80,10 +83,13 @@ check_column_skewness(df,"MSSubClass")
 ```
 
 ## LotFrontage
-checking the skewness of a temporary df which does not include the values of the column LotFrontage which has value 0 and plotting it against the salePrice to check whether it is suitable for the model or not.
-skewness before log transform is 2.1635691423248837.
-now removing the skewness and checking the value againa and plotting it again to see the difference.
-skewness atfer log transform = -0.7287278423055492
+Checking the skewness of a temporary df which does not include the values of the column LotFrontage which has value 0 and plotting it against the salePrice to check whether it is suitable for the model or not.
+
+Skewness before log transform is 2.1635691423248837.
+
+Now removing the skewness and checking the value againa and plotting it again to see the difference.
+
+Skewness atfer log transform = -0.7287278423055492
 ```{python}
 
 temp_df = df.loc[df['LotFrontage']!=0]
@@ -94,6 +100,7 @@ contvssale(contvar="LotFrontage",df=temp_df)
 
 ## LotArea
 Skewness = -0.1374044.
+
 The value is acceptable as it has already been transformed using the log transformation.
 ```{python}
 remove_skewness(temp_df,"LotArea")
@@ -102,6 +109,7 @@ contvssale(contvar="LotArea",df=temp_df)
 
 ## YearBuilt
 Skewness = -0.6134611.
+
 As the skewness of the column is already less than 1 there is no need to apply the log transformation.
 ```{python}
 contvssale(contvar="YearBuilt",df=temp_df)
@@ -110,6 +118,7 @@ check_column_skewness(temp_df,"YearBuilt")
 
 ## YearRemodAdd
 Skewness=-0.503562002.
+
 As from the below countplot, boxplot and regplot we can see that this data is not skewed.
 ```{python}
 contvssale(contvar="YearRemodAdd",df=df)
@@ -121,9 +130,11 @@ contvscont(contvar="YearBuilt",df=df,tarvar="YearRemodAdd")
 ```
 
 ## MasVnrArea
-skewness = 2.677616.
+Skewness = 2.677616.
+
 From the below graph we can see that this data is a little positively skewed so we can apply here log transformation.
-skewness after = 0.50353171.
+
+Skewness after = 0.50353171.
 ```{python}
 op = remove_skewness(df,"MasVnrArea")
 check_column_skewness(df,"MasVnrArea")
@@ -131,9 +142,11 @@ contvssale(contvar="MasVnrArea",df=df)
 ```
 
 ## BsmtFinSF1--
-skewness = 1.685503071910789.
+Skewness = 1.685503071910789.
+
 From the regression plot as well as boxplot we can say that this data is slightly skewed as it has more confidence in the regression plot.
-skewness = -0.618409817855514.
+
+Skewness = -0.618409817855514.
 ```{python}
 remove_skewness(df,"BsmtFinSF1")
 check_column_skewness(df,"BsmtFinSF1")
@@ -144,7 +157,8 @@ check_column_skewness(temp_df,"BsmtFinSF1")
 ```
 
 ## BsmtFinSF2: Type 2 finished square feet
-skewness = 4.255261108933303.
+Skewness = 4.255261108933303.
+
 The data is positively skewed and may impact our model so we apply log transform.
 skewness = 2.434961825856814.
 After removing the 0 values we get the column with skewness which is less than 1.

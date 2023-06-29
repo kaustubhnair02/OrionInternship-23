@@ -2,7 +2,97 @@
 Kaustubh S Nair
 2023-06-29
 
-## 🎯The AEMS (Advanced Estate Management System) House Prediction Regression Model is a machine learning-based system designed to accurately predict house prices. The model leverages regression algorithms and advanced data analysis techniques to estimate the monetary value of residential properties based on a variety of input features. By analyzing historical data and learning from patterns, the AEMS model aims to provide reliable and precise predictions, facilitating informed decision-making in the real estate industry.The model incorporates various stages of data preprocessing and feature engineering to handle missing values, outliers, and transform variables into a suitable format for regression analysis. Techniques such as log transformation, one-hot encoding, and label encoding are applied to ensure the optimal representation of the data. The model also employs advanced regression algorithms, such as linear regression, decision trees, random forests, or gradient boosting, to capture complex relationships and accurately estimate house prices.
+- [🎯The AEMS (Advanced Estate Management
+  System)](#the-aems-advanced-estate-management-system)
+- [🎯PRE-PROCESSING & EDA :](#pre-processing-eda)
+- [Columns with NO Missing_Values](#columns-with-no-missing_values)
+- [Target:SalePrie](#targetsaleprie)
+- [MSSubClass](#mssubclass)
+- [LotFrontage](#lotfrontage)
+- [LotArea](#lotarea)
+- [YearBuilt](#yearbuilt)
+- [YearRemodAdd](#yearremodadd)
+- [YearRemodAdd vs YearBuilt](#yearremodadd-vs-yearbuilt)
+- [MasVnrArea](#masvnrarea)
+- [BsmtFinSF1–](#bsmtfinsf1)
+- [BsmtFinSF2: Type 2 finished square
+  feet](#bsmtfinsf2-type-2-finished-square-feet)
+- [TotalBsmtSF: Total square feet of
+  basement](#totalbsmtsf-total-square-feet-of-basement)
+- [GrLivArea: Above grade (ground) living area square
+  feet](#grlivarea-above-grade-ground-living-area-square-feet)
+- [FullBath: Full bathrooms above
+  grade](#fullbath-full-bathrooms-above-grade)
+- [BedroomAbvGr: Bedrooms above
+  grade](#bedroomabvgr-bedrooms-above-grade)
+- [KitchenAbvGr: Kitchens above
+  grade](#kitchenabvgr-kitchens-above-grade)
+- [TotRmsAbvGrd: Total rooms above grade (does not include
+  bathrooms)](#totrmsabvgrd-total-rooms-above-grade-does-not-include-bathrooms)
+- [Fireplaces: Number of fireplaces](#fireplaces-number-of-fireplaces)
+- [GarageCars: Size of garage in car
+  capacity](#garagecars-size-of-garage-in-car-capacity)
+- [GarageArea: Size of garage in square
+  feet](#garagearea-size-of-garage-in-square-feet)
+- [garagecars vs garage area](#garagecars-vs-garage-area)
+- [OpenPorchSF: Open porch area in square
+  feet(best)](#openporchsf-open-porch-area-in-square-feetbest)
+- [ScreenPorch: Screen porch area in square
+  feet](#screenporch-screen-porch-area-in-square-feet)
+- [current age of the buildings according to the
+  YearRemodAdd](#current-age-of-the-buildings-according-to-the-yearremodadd)
+- [Age of the building acc to the
+  yearsold](#age-of-the-building-acc-to-the-yearsold)
+- [garage year built](#garage-year-built)
+- [🎯TRAINING AND EVALUATION : Split the preprocessed dataset into
+  training and testing sets to evaluate the model’s performance on
+  unseen data.Ensure proper stratification if the dataset is imbalanced
+  or if specific classes or categories need to be represented equally in
+  both
+  sets.](#training-and-evaluation-split-the-preprocessed-dataset-into-training-and-testing-sets-to-evaluate-the-models-performance-on-unseen-data.ensure-proper-stratification-if-the-dataset-is-imbalanced-or-if-specific-classes-or-categories-need-to-be-represented-equally-in-both-sets.)
+- [Select the variables that are Nominal from
+  var_dsc](#select-the-variables-that-are-nominal-from-var_dsc)
+- [Select the variables that are Ordinal from
+  var_dsc](#select-the-variables-that-are-ordinal-from-var_dsc)
+- [Select the variables that are Continuous from
+  var_dsc](#select-the-variables-that-are-continuous-from-var_dsc)
+- [Creating arguments for the function to be
+  used](#creating-arguments-for-the-function-to-be-used)
+- [Dropping the columns with the most missing
+  ratio](#dropping-the-columns-with-the-most-missing-ratio)
+- [Applying labelencoding , one hot encoding and log tranfromation on
+  the above generated
+  lists](#applying-labelencoding-one-hot-encoding-and-log-tranfromation-on-the-above-generated-lists)
+- [Splitting the data](#splitting-the-data)
+- [MODEL 1 :Linear Regression Model With the Mutual Information
+  Data](#model-1-linear-regression-model-with-the-mutual-information-data)
+- [Scores](#scores)
+- [MODEL 2 :RandomForest Regression](#model-2-randomforest-regression)
+- [Scores of the RandomForest
+  Regression](#scores-of-the-randomforest-regression)
+- [➡️CONCLUSION : From the above insights on the various scores and rmse
+  and r2 values we can conclude that linear regression model with the
+  mutual information data will be the most suitable for this house price
+  prediction
+  model.](#conclusion-from-the-above-insights-on-the-various-scores-and-rmse-and-r2-values-we-can-conclude-that-linear-regression-model-with-the-mutual-information-data-will-be-the-most-suitable-for-this-house-price-prediction-model.)
+
+## 🎯The AEMS (Advanced Estate Management System)
+
+House Prediction Regression Model is a machine learning-based system
+designed to accurately predict house prices. The model leverages
+regression algorithms and advanced data analysis techniques to estimate
+the monetary value of residential properties based on a variety of input
+features. By analyzing historical data and learning from patterns, the
+AEMS model aims to provide reliable and precise predictions,
+facilitating informed decision-making in the real estate industry.The
+model incorporates various stages of data preprocessing and feature
+engineering to handle missing values, outliers, and transform variables
+into a suitable format for regression analysis. Techniques such as log
+transformation, one-hot encoding, and label encoding are applied to
+ensure the optimal representation of the data. The model also employs
+advanced regression algorithms, such as linear regression, decision
+trees, random forests, or gradient boosting, to capture complex
+relationships and accurately estimate house prices.
 
 <details>
 <summary>Code</summary>
@@ -40,7 +130,17 @@ temp_df=df
 
 </details>
 
-## 🎯PRE-PROCESSING & EDA : EDA (Exploratory Data Analysis) and preprocessing play crucial roles in the development of the AEMS House Prediction Regression Model. These stages involve thorough analysis, cleaning, and transformation of the dataset to ensure optimal data quality and feature representation. Analyze the distribution of numerical features and address skewness or non-normality by applying transformations like log transformation.Convert categorical variables into numerical representations using one-hot encoding or label encoding techniques, depending on the nature and cardinality of the variables.
+## 🎯PRE-PROCESSING & EDA :
+
+EDA (Exploratory Data Analysis) and preprocessing play crucial roles in
+the development of the AEMS House Prediction Regression Model. These
+stages involve thorough analysis, cleaning, and transformation of the
+dataset to ensure optimal data quality and feature representation.
+Analyze the distribution of numerical features and address skewness or
+non-normality by applying transformations like log
+transformation.Convert categorical variables into numerical
+representations using one-hot encoding or label encoding techniques,
+depending on the nature and cardinality of the variables.
 
 <details>
 <summary>Code</summary>
@@ -190,12 +290,17 @@ check_column_skewness(df,"MSSubClass")
 
 ## LotFrontage
 
-checking the skewness of a temporary df which does not include the
+Checking the skewness of a temporary df which does not include the
 values of the column LotFrontage which has value 0 and plotting it
 against the salePrice to check whether it is suitable for the model or
-not. skewness before log transform is 2.1635691423248837. now removing
-the skewness and checking the value againa and plotting it again to see
-the difference. skewness atfer log transform = -0.7287278423055492
+not.
+
+Skewness before log transform is 2.1635691423248837.
+
+Now removing the skewness and checking the value againa and plotting it
+again to see the difference.
+
+Skewness atfer log transform = -0.7287278423055492
 
 <details>
 <summary>Code</summary>
@@ -213,8 +318,10 @@ contvssale(contvar="LotFrontage",df=temp_df)
 
 ## LotArea
 
-Skewness = -0.1374044. The value is acceptable as it has already been
-transformed using the log transformation.
+Skewness = -0.1374044.
+
+The value is acceptable as it has already been transformed using the log
+transformation.
 
 <details>
 <summary>Code</summary>
@@ -230,8 +337,10 @@ contvssale(contvar="LotArea",df=temp_df)
 
 ## YearBuilt
 
-Skewness = -0.6134611. As the skewness of the column is already less
-than 1 there is no need to apply the log transformation.
+Skewness = -0.6134611.
+
+As the skewness of the column is already less than 1 there is no need to
+apply the log transformation.
 
 <details>
 <summary>Code</summary>
@@ -249,8 +358,10 @@ check_column_skewness(temp_df,"YearBuilt")
 
 ## YearRemodAdd
 
-Skewness=-0.503562002. As from the below countplot, boxplot and regplot
-we can see that this data is not skewed.
+Skewness=-0.503562002.
+
+As from the below countplot, boxplot and regplot we can see that this
+data is not skewed.
 
 <details>
 <summary>Code</summary>
@@ -278,9 +389,12 @@ contvscont(contvar="YearBuilt",df=df,tarvar="YearRemodAdd")
 
 ## MasVnrArea
 
-skewness = 2.677616. From the below graph we can see that this data is a
-little positively skewed so we can apply here log transformation.
-skewness after = 0.50353171.
+Skewness = 2.677616.
+
+From the below graph we can see that this data is a little positively
+skewed so we can apply here log transformation.
+
+Skewness after = 0.50353171.
 
 <details>
 <summary>Code</summary>
@@ -297,9 +411,12 @@ contvssale(contvar="MasVnrArea",df=df)
 
 ## BsmtFinSF1–
 
-skewness = 1.685503071910789. From the regression plot as well as
-boxplot we can say that this data is slightly skewed as it has more
-confidence in the regression plot. skewness = -0.618409817855514.
+Skewness = 1.685503071910789.
+
+From the regression plot as well as boxplot we can say that this data is
+slightly skewed as it has more confidence in the regression plot.
+
+Skewness = -0.618409817855514.
 
 <details>
 <summary>Code</summary>
@@ -320,10 +437,12 @@ check_column_skewness(temp_df,"BsmtFinSF1")
 
 ## BsmtFinSF2: Type 2 finished square feet
 
-skewness = 4.255261108933303. The data is positively skewed and may
-impact our model so we apply log transform. skewness =
-2.434961825856814. After removing the 0 values we get the column with
-skewness which is less than 1. skewness = 0.9942372017307054
+Skewness = 4.255261108933303.
+
+The data is positively skewed and may impact our model so we apply log
+transform. skewness = 2.434961825856814. After removing the 0 values we
+get the column with skewness which is less than 1. skewness =
+0.9942372017307054
 
 <details>
 <summary>Code</summary>
@@ -879,10 +998,10 @@ print(le)
 
 </details>
 
-    Mean Squared Error (RMSE) on train set: 557649783.3180425
-    Root Mean Squared Error (MSE) on train set: 23614.609531348226
-    R-squared score on train set: 0.9200856562805803
-    0.9
+    Mean Squared Error (RMSE) on train set: 552398408.2734274
+    Root Mean Squared Error (MSE) on train set: 23503.157410727337
+    R-squared score on train set: 0.9208382077974444
+    0.91
 
 ## MODEL 2 :RandomForest Regression
 
@@ -919,8 +1038,8 @@ print("Root Mean Squared Error (MSE) on train set:", rmse)
 
 </details>
 
-    0.8538392134618358
-    R-squared score on train set: 0.8880755975164845
-    Root Mean Squared Error (MSE) on train set: 27946.71670638753
+    0.8554202802584413
+    R-squared score on train set: 0.889683331900271
+    Root Mean Squared Error (MSE) on train set: 27745.270829356334
 
 ## ➡️CONCLUSION : From the above insights on the various scores and rmse and r2 values we can conclude that linear regression model with the mutual information data will be the most suitable for this house price prediction model.
