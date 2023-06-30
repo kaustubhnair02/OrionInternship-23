@@ -24,7 +24,7 @@ load_dotenv()  # take environment variables from .env.
 #ROOT_DIR1 =  os.environ.get("ROOT_DIR") 
 #print(ROOT_DIR1)
 ROOT_DIR =  os.environ.get("ROOT_DIR2") 
-print(ROOT_DIR)
+
 ```
 
 

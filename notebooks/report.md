@@ -95,13 +95,9 @@ load_dotenv()  # take environment variables from .env.
 #ROOT_DIR1 =  os.environ.get("ROOT_DIR") 
 #print(ROOT_DIR1)
 ROOT_DIR =  os.environ.get("ROOT_DIR2") 
-print(ROOT_DIR)
 ```
 
 </details>
-
-    E:/source/repos/OrionSummerInternship-2023
-
 <details>
 <summary>Code</summary>
 
@@ -1004,10 +1000,10 @@ print(le)
 
 </details>
 
-    Mean Squared Error (RMSE) on train set: 564239406.1396723
-    Root Mean Squared Error (MSE) on train set: 23753.724047813477
-    R-squared score on train set: 0.919141326346449
-    0.9
+    Mean Squared Error (RMSE) on train set: 551468179.5154297
+    Root Mean Squared Error (MSE) on train set: 23483.35963007486
+    R-squared score on train set: 0.9209715147993085
+    0.91
 
 # MODEL 2 :
 
@@ -1046,9 +1042,9 @@ print("Root Mean Squared Error (MSE) on train set:", rmse)
 
 </details>
 
-    0.8531318418616713
-    R-squared score on train set: 0.8934989996597973
-    Root Mean Squared Error (MSE) on train set: 27261.21725102832
+    0.8558424487348482
+    R-squared score on train set: 0.8889903973831512
+    Root Mean Squared Error (MSE) on train set: 27832.272911585656
 
 # ➡️CONCLUSION :
 
