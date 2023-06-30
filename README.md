@@ -1,6 +1,6 @@
 # OrionSummerInternship-2023
 # About the Internship
-During this summer internship, I had the opportunity to work on the AEMS House Prediction Model project and gain valuable experience in the field of data science. Throughout the internship, I learned and acquired skills in various aspects of the data science lifecycle, including data collection, preprocessing, exploratory data analysis, feature engineering, model selection, training, evaluation, and deployment.
+During this summer internship, I had the opportunity to work on the AMES House Prediction Model project and gain valuable experience in the field of data science. Throughout the internship, I learned and acquired skills in various aspects of the data science lifecycle, including data collection, preprocessing, exploratory data analysis, feature engineering, model selection, training, evaluation, and deployment.
 
 One of the key aspects I learned during this internship was the importance of data preprocessing. I gained hands-on experience in handling missing values, dealing with categorical variables.
 
@@ -25,7 +25,7 @@ Quarto 1.3.353
 
 requirement.txt
 
-# AEMS House Prediction Model - Summer Internship
+# AMES House Prediction Model - Summer Internship
 The AEMS House Prediction Model is a data science project aimed at developing a predictive model for house prices based on data collected from the Advanced Estate Management System (AEMS) database. The model utilizes various features such as house size, location, number of bedrooms, and other relevant attributes to estimate the price of a house. By leveraging machine learning algorithms and data analysis techniques, the model aims to provide accurate predictions to assist homeowners, real estate agents, and potential buyers in making informed decisions.
 
 ## Table of Contents
