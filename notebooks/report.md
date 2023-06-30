@@ -2,8 +2,8 @@
 Kaustubh S Nair
 2023-06-30
 
-- [🎯The AEMS (Advanced Estate Management
-  System)](#the-aems-advanced-estate-management-system)
+- [🎯The AMES (Advanced Estate Management
+  System)](#the-ames-advanced-estate-management-system)
 - [🎯PRE-PROCESSING & EDA :](#pre-processing-eda)
   - [Columns with NO Missing_Values](#columns-with-no-missing_values)
   - [Target:SalePrie](#targetsaleprie)
@@ -66,7 +66,7 @@ Kaustubh S Nair
     Regression](#scores-of-the-randomforest-regression)
 - [➡️CONCLUSION :](#conclusion)
 
-# 🎯The AEMS (Advanced Estate Management System)
+# 🎯The AMES (Advanced Estate Management System)
 
 House Prediction Regression Model is a machine learning-based system
 designed to accurately predict house prices. The model leverages
@@ -1004,10 +1004,10 @@ print(le)
 
 </details>
 
-    Mean Squared Error (RMSE) on train set: 579845384.2643638
-    Root Mean Squared Error (MSE) on train set: 24079.97890913453
-    R-squared score on train set: 0.9169049020937329
-    0.87
+    Mean Squared Error (RMSE) on train set: 564239406.1396723
+    Root Mean Squared Error (MSE) on train set: 23753.724047813477
+    R-squared score on train set: 0.919141326346449
+    0.9
 
 # MODEL 2 :
 
@@ -1046,9 +1046,9 @@ print("Root Mean Squared Error (MSE) on train set:", rmse)
 
 </details>
 
-    0.8564781442509231
-    R-squared score on train set: 0.8922377966923112
-    Root Mean Squared Error (MSE) on train set: 27422.158167555976
+    0.8531318418616713
+    R-squared score on train set: 0.8934989996597973
+    Root Mean Squared Error (MSE) on train set: 27261.21725102832
 
 # ➡️CONCLUSION :
 

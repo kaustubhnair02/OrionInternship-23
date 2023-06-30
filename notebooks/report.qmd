@@ -11,7 +11,7 @@ format:
 #jupyter: python3
 ---
 
-# 🎯The AEMS (Advanced Estate Management System)
+# 🎯The AMES (Advanced Estate Management System)
  House Prediction Regression Model is a machine learning-based system designed to accurately predict house prices. The model leverages regression algorithms and advanced data analysis techniques to estimate the monetary value of residential properties based on a variety of input features. By analyzing historical data and learning from patterns, the AEMS model aims to provide reliable and precise predictions, facilitating informed decision-making in the real estate industry.The model incorporates various stages of data preprocessing and feature engineering to handle missing values, outliers, and transform variables into a suitable format for regression analysis. Techniques such as log transformation, one-hot encoding, and label encoding are applied to ensure the optimal representation of the data. The model also employs advanced regression algorithms, such as linear regression, decision trees, random forests, or gradient boosting, to capture complex relationships and accurately estimate house prices.
 
  
