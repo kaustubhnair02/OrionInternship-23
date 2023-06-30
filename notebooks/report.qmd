@@ -8,7 +8,7 @@ format:
     code-tools: true
     code-fold: true
     toc: true       
-jupyter: python3
+#jupyter: python3
 ---
 
 # 🎯The AEMS (Advanced Estate Management System)

@@ -1,6 +1,6 @@
 # Orion Summer Internship (House Price Prediction Model)
 Kaustubh S Nair
-2023-06-29
+2023-06-30
 
 - [🎯The AEMS (Advanced Estate Management
   System)](#the-aems-advanced-estate-management-system)
@@ -1004,10 +1004,10 @@ print(le)
 
 </details>
 
-    Mean Squared Error (RMSE) on train set: 610476369.2962418
-    Root Mean Squared Error (MSE) on train set: 24707.820002910856
-    R-squared score on train set: 0.912515310024429
-    0.9
+    Mean Squared Error (RMSE) on train set: 579845384.2643638
+    Root Mean Squared Error (MSE) on train set: 24079.97890913453
+    R-squared score on train set: 0.9169049020937329
+    0.87
 
 # MODEL 2 :
 
@@ -1046,9 +1046,9 @@ print("Root Mean Squared Error (MSE) on train set:", rmse)
 
 </details>
 
-    0.8540036501093282
-    R-squared score on train set: 0.8919740384070951
-    Root Mean Squared Error (MSE) on train set: 27455.69683346098
+    0.8564781442509231
+    R-squared score on train set: 0.8922377966923112
+    Root Mean Squared Error (MSE) on train set: 27422.158167555976
 
 # ➡️CONCLUSION :
 
